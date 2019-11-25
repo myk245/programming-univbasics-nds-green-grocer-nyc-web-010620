@@ -47,9 +47,8 @@ def apply_coupons(cart, coupons)
         :count => coupon[:num]
       }
       item_info[:count] -= coupon[:num]
-    end #if
-  end #each
-  #cart.delete_if{|item_info| item_info[:count] <= 0}
+    end
+  end 
   cart
   # Consult README for inputs and outputs
   #
