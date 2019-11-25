@@ -62,7 +62,6 @@ def apply_clearance(cart)
     end
   end
   cart
-end 
   # Consult README for inputs and outputs
   #
   # REMEMBER: This method **should** update cart
