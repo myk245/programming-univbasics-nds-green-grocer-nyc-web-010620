@@ -13,7 +13,10 @@ end
 def consolidate_cart(cart)
   index = 0
   result = []
-  
+
+  while index < cart.count do
+    item_name = cart[index][:item]
+  end
   # Consult README for inputs and outputs
   #
   # REMEMBER: This returns a new Array that represents the cart. Don't merely
