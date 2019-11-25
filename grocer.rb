@@ -23,6 +23,8 @@ def consolidate_cart(cart)
       cart[index][:count] = 1
       result << cart[index]
   end
+  index += 1
+end 
   result
   # Consult README for inputs and outputs
   #
