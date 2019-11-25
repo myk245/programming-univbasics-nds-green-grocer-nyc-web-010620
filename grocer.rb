@@ -33,18 +33,23 @@ end
 end
 
 def apply_coupons(cart, coupons)
-  index = 0
-  while index < coupons.count do
-    coupon = coupons[:index]
-    item_with_coupon = find_item_by_name_in_collection(coupon[:item], cart)
-    item_is_in_basket = !!item_with_coupon
-    bulk_order = item_with_coupon && item_with_coupon[:count] >= coupon[:num]
-
-    if item_is_in_basket and bulk_order
-      apply_coupon_to_cart(item_with_coupon, coupon, cart)
-    end
-    index += 1
-  end
+  coupons.each do |coupon|
+    item_info = find_item_by_name_in_collection(coupon[:item], cart)
+	  item_w_coupon = find_item_by_name_in_collection(coupon[:item]+" W/COUPON", cart)
+    if item_w_coupon and item_info[:count] >= coupon[:num]
+	    item_w_coupon[:count] += coupon[:num]
+	    item_info[:count] -= coupon[:num]
+	  elsif item_info and item_info[:count] >= coupon[:num]
+      cart << {
+        :item => coupon[:item] + " W/COUPON",
+        :price => (coupon[:cost]/coupon[:num]).round(2),
+        :clearance => item_info[:clearance],
+        :count => coupon[:num]
+      }
+      item_info[:count] -= coupon[:num]
+    end #if
+  end #each
+  #cart.delete_if{|item_info| item_info[:count] <= 0}
   cart
   # Consult README for inputs and outputs
   #
